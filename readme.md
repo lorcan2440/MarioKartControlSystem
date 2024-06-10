@@ -1,3 +1,20 @@
+# Mario Kart DS Control System
+
+This project explores the techniques of control theory and related concepts to develop a control system for the game Mario Kart DS. The game is played automatically in the DeSmuME emulator, with automation provided by a Lua script. The main loop of the program is:
+
+- Lua script in DeSmuME captures a screenshot of the current game frame
+- Lua script sends the screenshot to a Python script via a TCP IPv4 socket
+- Python script uses computer vision (OpenCV) to extract the game state from the screenshot
+- Python script uses a control algorithm to determine the desired control input (button presses)
+- Python script sends the button press information back to the Lua script
+- Lua script presses the required buttons in the emulator, progressing the game state
+
+### Requirements
+
+- Windows 11
+- DeSmuME (x86), set up to use 32-bit Lua 5.1
+- Mario Kart DS ROM
+
 ### How to Install Dependencies for `screenshot.lua` (32-bit, in DeSmuME environment)
 
 1. Ensure you have the 32-bit version of `lua51.dll` in a directory added to PATH.
@@ -29,8 +46,8 @@
     ├── libpng13.dll
     ├── lua51.dll
 ```
-6. Inside `/socket/socket.lua`, on line 42, change `try = newtry()` to `try = socket.newtry()`.
-7. In your own Lua script that you are using this for, import the modules.
+7. Inside `/socket/socket.lua`, on line 42, change `try = newtry()` to `try = socket.newtry()`.
+8. In your own Lua script that you are using this for, import the modules.
     ```lua
     local gd_path = script_dir .. "path/to/gd.dll"
     local socket_path = script_dir .. "path/to/socket"
