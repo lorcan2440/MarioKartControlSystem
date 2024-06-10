@@ -68,6 +68,7 @@ This project explores the techniques of control theory and related concepts to d
 - [ ] Try to optimise the streaming rate: use UDP sockets instead of TCP, send grayscale images only, etc
 - [ ] Use morphological operations to produce sharper images of the track
 - [ ] Allow the player to manually steer while the script automatically holds A
+- [ ] Write the OpenCV and socket Python program in C++ for faster processing
 
 Ideas for control algorithm:
 - Set a specified path and design a PID controller to follow it (line following)
