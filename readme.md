@@ -46,8 +46,8 @@ This project explores the techniques of control theory and related concepts to d
     ├── libpng13.dll
     ├── lua51.dll
 ```
-7. Inside `/socket/socket.lua`, on line 42, change `try = newtry()` to `try = socket.newtry()`.
-8. In your own Lua script that you are using this for, import the modules.
+6. Inside `/socket/socket.lua`, on line 42, change `try = newtry()` to `try = socket.newtry()`.
+7. In your own Lua script that you are using this for, import the modules.
     ```lua
     local gd_path = script_dir .. "path/to/gd.dll"
     local socket_path = script_dir .. "path/to/socket"
