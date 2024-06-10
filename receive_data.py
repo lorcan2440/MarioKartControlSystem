@@ -48,7 +48,7 @@ def compute_button_input(img: np.ndarray) -> int:
     # 0 if button is not pressed, 1 if button is pressed
     # order: A, Left, Right, Unused, Unused, Unused, Unused, Unused
     # for now, just press and hold the A button (drive forward in Mario Kart)
-    return 0b11000000
+    return 0b10000000
 
 def send_buttons(sock: socket.socket, buttons: int) -> None:
     '''
