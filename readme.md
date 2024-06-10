@@ -38,7 +38,7 @@ This project explores the techniques of control theory and related concepts to d
     ├── mime/
         ├── mime/
             ├── core.dll
-    ├── free.type6.dll
+    ├── freetype6.dll
     ├── gd.dll
     ├── jpeg62.dll
     ├── libgd2.dll
