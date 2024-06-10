@@ -6,7 +6,7 @@ This project explores the techniques of control theory and related concepts to d
 - Lua script sends the screenshot to a Python script via a TCP IPv4 socket
 - Python script uses computer vision (OpenCV) to extract the game state from the screenshot
 - Python script uses a control algorithm to determine the desired control input (button presses)
-- Python script sends the button press information back to the Lua script
+- Python script sends the button press commands back to the Lua script
 - Lua script presses the required buttons in the emulator, progressing the game state
 
 ### Requirements
