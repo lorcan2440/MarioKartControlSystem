@@ -2,6 +2,18 @@ import socket
 import numpy as np
 import cv2
 
+'''
+BUG to investigate:
+
+  File "C:/Users/lnick/Documents/Games/Python/receive_data.py", line 24, in receive_image
+    length_str = sock.recv(9)  # data length (9 bytes)
+                 ^^^^^^^^^^^^
+1) ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2) ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+Lua script: Error receiving data: timeout
+'''
+
+
 def receive_image(sock: socket.socket) -> np.ndarray:
     '''
     Receives an image from the socket and returns it as a NumPy array, 
@@ -83,15 +95,20 @@ while cv2.waitKey(1) != ord('q'):  # loop for accepting connections, press 'q' t
     print(f"Connection from {client_address}.")
 
     while cv2.waitKey(1) != ord('q'):  # loop for processing image frames, press 'q' to quit
-        image = receive_image(client_socket)
-        if image is not None:
-            proc_img = process_image(image)
-            button_input = compute_button_input(proc_img)
-            send_buttons(client_socket, button_input)
-            cv2.imshow('Stream from DeSmuME', image)
-        else:
-            print('Failed to receive image. Closing connection.')
-            break
+        try:
+            image = receive_image(client_socket)
+            if image is not None:
+                proc_img = process_image(image)
+                button_input = compute_button_input(proc_img)
+                send_buttons(client_socket, button_input)
+                cv2.imshow('Stream from DeSmuME', image)
+            else:
+                print('Error: Failed to receive image.')
+                break
+        except (ConnectionAbortedError, ConnectionResetError) as e:
+            if e.errno in (10053, 10054):
+                print(f'Error: {e}')
+                break
     else:
         print('Quit key pressed. Closing connection and server.')
         cv2.destroyAllWindows()
