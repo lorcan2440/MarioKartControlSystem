@@ -63,10 +63,10 @@ This project explores the techniques of control theory and related concepts to d
 
 ### To do list
 
-[-] Find out how to take screenshots in Lua
-[-] Use sockets to stream the screen image data to Python's OpenCV library
-[ ] Try to optimise the streaming rate: use UDP sockets instead of TCP, send grayscale images only, etc
-[ ] Use morphological operations to produce sharper images of the track
+- [x] Find out how to take screenshots in Lua
+- [x] Use sockets to stream the screen image data to Python's OpenCV library
+- [ ] Try to optimise the streaming rate: use UDP sockets instead of TCP, send grayscale images only, etc
+- [ ] Use morphological operations to produce sharper images of the track
 
 Ideas for control algorithm:
 - Set a specified path and design a PID controller to follow it (line following)
