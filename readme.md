@@ -67,9 +67,11 @@ This project explores the techniques of control theory and related concepts to d
 - [x] Use sockets to stream the screen image data to Python's OpenCV library
 - [ ] Try to optimise the streaming rate: use UDP sockets instead of TCP, send grayscale images only, etc
 - [ ] Use morphological operations to produce sharper images of the track
+- [ ] Allow the player to manually steer while the script automatically holds A
 
 Ideas for control algorithm:
 - Set a specified path and design a PID controller to follow it (line following)
 - Or MPC with discrete inputs [reference](https://ieeexplore.ieee.org/document/1346886)
 - Use MATLAB to design optimal controllers ($H_2$ or $H_{\infty}$)
 - Deep reinforcement learning using OpenAI gym
+- - RL with human feedback - allow manual steering override as feedback signal. Look at how Wayve did this for autonomous driving.
