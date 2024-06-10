@@ -3,7 +3,7 @@
 This project explores the techniques of control theory and related concepts to develop a control system for the game Mario Kart DS. The game is played automatically in the DeSmuME emulator, with automation provided by a Lua script. The main loop of the program is:
 
 - Lua script in DeSmuME captures a screenshot of the current game frame
-- Lua script sends the screenshot to a Python script via a TCP IPv4 socket
+- Lua script sends the screenshot to a Python script via a TCP IPv4 socket [To do: change to UDP for faster transmission]
 - Python script uses computer vision (OpenCV) to extract the game state from the screenshot
 - Python script uses a control algorithm to determine the desired control input (button presses)
 - Python script sends the button press information back to the Lua script
