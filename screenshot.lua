@@ -13,7 +13,7 @@ local mime = require("mime")
 
 local host, port = "127.0.0.1", 12345
 local client = assert(socket.connect(host, port))
-client:settimeout(0.1)  -- set 100 ms timeout for non-blocking mode
+client:settimeout(0.5)  -- set 500 ms timeout for non-blocking mode
 print("Connected to the server: " .. host .. ":" .. port)
 
 OR, XOR, AND = 1, 3, 4
