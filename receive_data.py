@@ -44,10 +44,11 @@ def process_image(img: np.ndarray) -> np.ndarray:
     return img
 
 def compute_button_input(img: np.ndarray) -> int:
-    # output format: one byte representing the button input
+    # output format: one byte representing the button inputs
     # 0 if button is not pressed, 1 if button is pressed
     # order: A, Left, Right, Unused, Unused, Unused, Unused, Unused
-    return 0b10000000
+    # for now, just press and hold the A button (drive forward in Mario Kart)
+    return 0b11000000
 
 def send_buttons(sock: socket.socket, buttons: int) -> None:
     '''
@@ -68,28 +69,34 @@ def send_buttons(sock: socket.socket, buttons: int) -> None:
     sock.sendall(data)
 
 
-# Set up the server to listen for connections
+# Set up the server using TCP IPv4
 host, port = "127.0.0.1", 12345
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((host, port))
-server.listen(1)
-print(f"Listening on {host}:{port}")
 
-# Accept a connection
-client_socket, client_address = server.accept()
-print(f"Connection from {client_address}")
+while cv2.waitKey(1) != ord('q'):  # loop for accepting connections, press 'q' to quit
 
-# Receive and process images
-while cv2.waitKey(1) != ord('q'):
-    image = receive_image(client_socket)
-    if image is not None:
-        proc_img = process_image(image)
-        button_input = compute_button_input(proc_img)
-        send_buttons(client_socket, button_input)
-        cv2.imshow('Stream from DeSmuME', image)
+    # wait for a connection
+    server.listen(1)
+    print(f"Listening for connections on {host}:{port}...")
+    client_socket, client_address = server.accept()
+    print(f"Connection from {client_address}.")
+
+    while cv2.waitKey(1) != ord('q'):  # loop for processing image frames, press 'q' to quit
+        image = receive_image(client_socket)
+        if image is not None:
+            proc_img = process_image(image)
+            button_input = compute_button_input(proc_img)
+            send_buttons(client_socket, button_input)
+            cv2.imshow('Stream from DeSmuME', image)
+        else:
+            print('Failed to receive image. Closing connection.')
+            break
     else:
-        raise ConnectionError('Failed to receive an image from the socket.')
-else:
-    print('Closing connection.')
-    client_socket.close()
-    server.close()
+        print('Quit key pressed. Closing connection and server.')
+        cv2.destroyAllWindows()
+        break
+
+print('Closing server.')
+client_socket.close()
+server.close()
