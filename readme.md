@@ -13,7 +13,17 @@ This project explores the techniques of control theory and related concepts to d
 
 - Windows 11
 - DeSmuME (x86), set up to use 32-bit Lua 5.1
+- Lua libraries: [lua-gd](https://github.com/ittner/lua-gd), [LuaSocket](https://github.com/lunarmodules/luasocket)
+- Python libraries: [OpenCV](https://pypi.org/project/opencv-python/), [NumPy](https://numpy.org/)
 - Mario Kart DS ROM
+
+### How to Run
+
+1. Open DeSmuME with Mario Kart DS.
+2. In python, run `receive_data.py` to set up a server.
+3. In the Lua scripting window of DeSmuME, load `screenshot.lua`.
+4. Start a race in Mario Kart.
+5. You will see game in OpenCV playing itself.
 
 ### How to Install Dependencies for `screenshot.lua` (32-bit, in DeSmuME environment)
 
